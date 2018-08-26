@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <a href="https://github.com/rzoller/static-map">
+            <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+        </a>
+        <div>
+            <button id="download" disabled>Download</button>
+        </div>
+        <script type="text/javascript" src="static-map.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"
+            integrity="sha256-htuR1Owx8i9hm4h4Y4d/FjlPLoj2teQmhJ5WnNSo3w0="
+            crossorigin="anonymous">
+        </script>
+        <script>
+            var downloadButton = document.getElementById('download');
+            downloadButton.addEventListener('click', function() {
+                canvas.toBlob(function(blob) {
+                    saveAs(blob, 'map.png');
+                });
+            });
+
+            var canvas = document.createElement('canvas');
+            document.body.appendChild(canvas)
+            canvas.width = 512;
+            canvas.height = 512;
+
+            var options = {
+                concurrency: 3,
+                rateLimit: 3
+            }
+
+            var staticMap = StaticMap([
+                'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            ], options);
+
+            var lon = 7.438639;
+            var lat = 46.951083;
+            var zoom = 15;
+            staticMap.getMap(canvas, lon, lat, zoom, function() {
+                downloadButton.disabled = false;
+            });
+        </script>
+    </body>
+</html>
