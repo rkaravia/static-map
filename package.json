@@ -1,6 +1,6 @@
 {
   "name": "@rz0/static-map",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Render map tiles in a canvas, given a slippy map tile URL.",
   "main": "index.js",
   "repository": {
