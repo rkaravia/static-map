@@ -4,7 +4,7 @@ Render map tiles in a canvas, given a [slippy map tile URL](https://wiki.openstr
 
 ## Demo
 
-The [demo](https://rzoller.ch/static-map) renders 512x512px of [OpenStreetMap](https://www.openstreetmap.org/).
+The [demo](https://rkaravia.github.io/static-map/) renders 512x512px of [OpenStreetMap](https://www.openstreetmap.org/).
 
 ## Install
 

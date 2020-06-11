@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/rzoller/static-map"
+    "url": "git://github.com/rkaravia/static-map"
   },
   "scripts": {
     "build": "browserify index.js -o static-map.js --standalone StaticMap",
