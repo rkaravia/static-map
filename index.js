@@ -10,7 +10,11 @@ var DEFAULT_TILE_LOADER = function(url, callback) {
     image.src = url;
 }
 
-function toPixelCoordinates(lon, lat, zoom, size) {
+var WEBMERCATOR_XYZ = function(options) {
+    var lon = options.lon;
+    var lat = options.lat;
+    var zoom = options.zoom;
+    var size = options.size;
     var x = lon / 360 + 0.5;
     var y = 0.5 - Math.log(Math.tan(Math.PI / 4 + lat * Math.PI / 360)) / (2 * Math.PI);
     return [x, y].map(function(coord) {
@@ -29,7 +33,12 @@ GetMapTask.prototype.initBounds = function(lon, lat) {
     var width = this.canvas.width;
     var height = this.canvas.height;
     var size = this.options.size;
-    var center = toPixelCoordinates(lon, lat, this.zoom, size);
+    var center = this.options.lonLatToPixel({
+        lon: lon,
+        lat: lat, 
+        zoom: this.zoom, 
+        size: size
+    });
     var topLeft = [center[0] - width / 2, center[1] - height / 2];
     var bottomRight = [center[0] + width / 2, center[1] + height / 2];
 
@@ -114,6 +123,7 @@ function StaticMap(urls, options) {
         concurrency: options.concurrency || Number.POSITIVE_INFINITY,
         size: options.size || 256,
         tileLoader: options.tileLoader || DEFAULT_TILE_LOADER,
+        lonLatToPixel: options.lonLatToPixel || WEBMERCATOR_XYZ,
         urls: Array.isArray(urls) ? urls : [urls]
     };
     if (options.rateLimit) {
