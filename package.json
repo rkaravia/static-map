@@ -1,5 +1,5 @@
 {
-  "name": "@rz0/static-map",
+  "name": "@rkaravia/static-map",
   "version": "0.2.0",
   "description": "Render map tiles in a canvas, given a slippy map tile URL.",
   "main": "index.js",
